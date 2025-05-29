@@ -30,3 +30,14 @@
 *.exe
 *.out
 *.app
+
+
+/disk/*
+!/disk/.gitkeep
+*.map
+*.tar
+*.o
+*.elf
+*.bin
+*.log
+*.pcap

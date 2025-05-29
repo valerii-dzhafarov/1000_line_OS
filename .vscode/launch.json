@@ -1,0 +1,23 @@
+{
+  "configurations": [
+  {
+    "name": "Debug RISC-V Kernel",
+    "type": "cppdbg",
+    "request": "launch",
+    "program": "${workspaceFolder}/build/kernel.elf",
+    "miDebuggerPath": "riscv64-elf-gdb",
+    "miDebuggerServerAddress": "localhost:1234",
+    "stopAtEntry": true,
+    "cwd": "${workspaceFolder}",
+    "externalConsole": false,
+    "MIMode": "gdb",
+    "setupCommands": [
+      {
+        "description": "Enable pretty-printing",
+        "text": "-enable-pretty-printing",
+        "ignoreFailures": true
+      }
+    ],
+  }
+  ]
+}
