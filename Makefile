@@ -30,7 +30,7 @@ endif
 
 
 LINKER_SCRIPT=$(SRC_DIR)/kernel.ld
-C_FILES+=$(SRC_DIR)/kernel.c
+C_FILES+=$(SRC_DIR)/*.c
 KERNEL=$(BUILD_DIR)/kernel.elf
 DISAS=$(BUILD_DIR)/kernel.S
 
@@ -44,8 +44,8 @@ $(KERNEL): $(BUILD_DIR) $(C_FILES) $(LINKER_SCRIPT)
 	$(CC) \
 	$(CFLAGS) \
 	-Wl,-Map=$(BUILD_DIR)/kernel.map \
-	-o $(KERNEL) \
 	-Wl,-T$(LINKER_SCRIPT) \
+	-o $(KERNEL) \
 	$(C_FILES)
 
 run: $(KERNEL)
