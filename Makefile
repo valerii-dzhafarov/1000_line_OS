@@ -30,7 +30,9 @@ endif
 
 
 LINKER_SCRIPT=$(SRC_DIR)/kernel.ld
-C_FILES+=$(SRC_DIR)/*.c
+C_FILES+= $(wildcard $(SRC_DIR)/*.c)
+H_FILES+= $(wildcard $(SRC_DIR)/*.h)
+
 KERNEL=$(BUILD_DIR)/kernel.elf
 DISAS=$(BUILD_DIR)/kernel.S
 
@@ -40,7 +42,8 @@ $(BUILD_DIR):
 
 compile: $(KERNEL)
 
-$(KERNEL): $(BUILD_DIR) $(C_FILES) $(LINKER_SCRIPT)
+
+$(KERNEL): $(BUILD_DIR) $(C_FILES) $(LINKER_SCRIPT) $(H_FILES)
 	$(CC) \
 	$(CFLAGS) \
 	-Wl,-Map=$(BUILD_DIR)/kernel.map \

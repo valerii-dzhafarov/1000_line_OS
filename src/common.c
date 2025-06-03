@@ -14,8 +14,8 @@ void printf(const char* fmt, ...) {
             case 's': {
                 const char* s = va_arg(vargs, const char*);
                 while (*s) {
-                    putchar(*s);
-                    ++s;
+                    putchar(*s++);
+                    //++s;
                 }
                 break;
             }
@@ -46,6 +46,10 @@ void printf(const char* fmt, ...) {
             }
             case 'x': { // Print an integer in hexadecimal.
                     unsigned value = va_arg(vargs, unsigned);
+                    if (!value) {
+                        putchar('0');
+                        break;
+                    }
                     unsigned non_zero_started = 0; 
                     for (int i = 7; i >= 0; i--) {
                         unsigned nibble = (value >> (i * 4)) & 0xf;
@@ -67,7 +71,59 @@ void printf(const char* fmt, ...) {
 
         ++fmt;
     }
-
-    //va_arg
     va_end(vargs);
 }
+
+
+void* memcpy(void *dst, const void *src, size_t n) {
+    for (size_t i = 0; i < n; ++i) {
+        *((char*)dst + i) = *((const char*)src + i);
+    }
+    return dst;
+}
+
+void* memset(void *buf, char c, size_t n) {
+    for (size_t i = 0; i < n; ++i) {
+        *((char*)buf + i) = c;
+    }
+    return buf;
+
+}
+
+char *strcpy(char *dst, const char *src) {
+    char *d = dst;
+    while (*src)
+        *d++ = *src++;
+    *d = '\0';
+    return dst;
+}
+
+char *strcpy_s(char *dst, size_t dstsize, const char *src) {
+    size_t cnt = 0;
+    while (true) {
+        if (dstsize == cnt++)
+            break;
+        *(dst++) = *(src++);
+        if (*src == '\0') break; 
+    }
+
+    return dst;
+}
+
+int strcmp(const char *s1, const char *s2) {
+
+    while (*s1 && *s2 ) {
+        if (*s1 != *s2) {
+            break;
+        }
+        ++s1;
+        ++s2;
+    }
+
+    return *(unsigned char*)s1 - *(unsigned char*)s2;
+}
+
+
+
+
+
