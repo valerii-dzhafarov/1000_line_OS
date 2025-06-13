@@ -14,18 +14,29 @@ SRC_DIR = src
 
 QEMU = qemu-system-riscv32
 
-CC = clang 
-CFLAGS += -std=c11 -O2 -g3 -Wall -Wextra  -fno-stack-protector -ffreestanding -nostdlib --target=riscv32-unknown-elf
+CC = clang
+CFLAGS += -std=c11
+CFLAGS += -Wall
+CFLAGS += -Wextra
+CFLAGS += -fno-stack-protector
+CFLAGS += -ffreestanding 
+CFLAGS += -nostdlib 
+CFLAGS += --target=riscv32-unknown-elf
+CFLAGS += -O0
+
 QEMUFLAGS += -machine virt
 QEMUFLAGS += -bios default
 QEMUFLAGS += -nographic
 QEMUFLAGS += -serial mon:stdio
 QEMUFLAGS += --no-reboot
 
+
 ifeq ($(GDB),1)
+	CFLAGS += -g3
 	QEMUFLAGS += -S 
 	QEMUFLAGS += -gdb 
 	QEMUFLAGS += tcp::1234
+else
 endif
 
 
@@ -57,7 +68,7 @@ run: $(KERNEL)
 disas: $(DISAS)
 
 ifeq ($(DISAS_IN_FILE),1)
-	DISAS_FLAG += >> $@
+DISAS_FLAG += > $@
 endif
 
 $(DISAS): $(KERNEL)

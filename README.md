@@ -17,3 +17,5 @@ The implementation of https://operating-system-in-1000-lines.vercel.app/en/
 `C-a c`    switch between console and monitor
 
 `C-a C-a`  sends C-a
+
+

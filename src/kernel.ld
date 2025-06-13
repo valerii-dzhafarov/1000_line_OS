@@ -3,7 +3,7 @@ ENTRY(boot)
 SECTIONS {
     . = 0x80200000;
 
-    .text :{
+    .text :{ /* instructions */
         KEEP(*(.text.boot));
         *(.text .text.*);
     }
@@ -25,4 +25,15 @@ SECTIONS {
     . = ALIGN(4);
     . += 128 * 1024; /* 128KB */
     __stack_top = .;
+
+    . = ALIGN(4);
+    __ram_meta = .;
+    . += 4 * (1024 * 16); /* 16K words*/
+    __ram_meta_end = .;
+
+    . = ALIGN(4096);
+    __free_ram = .;
+    . += 4096 * (1024 * 16); /* 64MB = 16K pages*/ 
+    __free_ram_end = .;
+    
 }

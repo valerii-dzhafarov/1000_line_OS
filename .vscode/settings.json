@@ -1,5 +1,10 @@
 {
     "files.associations": {
-        "tuple": "c"
-    }
+        "tuple": "c",
+        "common.h": "c",
+        "variant": "c"
+    },
+    "lldb.showDisassembly": "auto",
+    "lldb.dereferencePointers": true,
+    "lldb.consoleMode": "commands"
 }
